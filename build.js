@@ -16,17 +16,6 @@ app.models.MainModel = require("./content/models/mainmodel");
 app.views.MainView = require("./content/views/mainview");
 app.global.theMovieDb = require("../vendor/moviedb");
 
-
-app.models.ModelMovie = Backbone.Model.extend({
-    defaults: {
-        rating: 0,
-        img: "http://placehold.it/100x250",
-        name: "No name",
-        title: "No title"
-    }
-});
-
-
 new app.views.MainView({
     model: new app.models.MainModel
 });
@@ -34,7 +23,7 @@ new app.views.MainView({
 
 
 
-},{"../vendor/moviedb":5,"./content/models/mainmodel":2,"./content/views/mainview":3,"Backbone":6,"jquery":7,"underscore":8}],2:[function(require,module,exports){
+},{"../vendor/moviedb":7,"./content/models/mainmodel":2,"./content/views/mainview":4,"Backbone":8,"jquery":9,"underscore":10}],2:[function(require,module,exports){
 "use strict";
 
 var $ = require("jquery");
@@ -49,7 +38,25 @@ module.exports = Backbone.Model.extend({
         image_uri: "http://image.tmdb.org/t/p/w300"
     }
 });
-},{"Backbone":6,"jquery":7,"underscore":8}],3:[function(require,module,exports){
+},{"Backbone":8,"jquery":9,"underscore":10}],3:[function(require,module,exports){
+"use strict";
+
+var Backbone = require("Backbone");
+var _ = require("underscore");
+
+var ModelMovie = Backbone.Model.extend({
+    defaults: {
+        rating: 0,
+        img: "http://placehold.it/100x250",
+        name: "No name",
+        title: "No title"
+    }
+});
+
+module.exports = Backbone.Collection.extend({
+   model: ModelMovie
+});
+},{"Backbone":8,"underscore":10}],4:[function(require,module,exports){
 "use strict";
 
 var $ = require("jquery");
@@ -57,6 +64,8 @@ var Backbone = require("Backbone");
 var _ = require("underscore");
 Backbone.$ = $;
 var HeadView = require("../../header/views/headview");
+var MovieCollection = require("../models/moviemodel");
+var MovieView = require("./movieview");
 
 module.exports = Backbone.View.extend({
     el: "main",
@@ -65,10 +74,49 @@ module.exports = Backbone.View.extend({
     },
     render: function() {
         new HeadView();
+        new MovieView({
+            collection: new MovieCollection
+        });
         return this;
     }
 });
-},{"../../header/views/headview":4,"Backbone":6,"jquery":7,"underscore":8}],4:[function(require,module,exports){
+},{"../../header/views/headview":6,"../models/moviemodel":3,"./movieview":5,"Backbone":8,"jquery":9,"underscore":10}],5:[function(require,module,exports){
+"use strict";
+
+var $ = require("jquery");
+var Backbone = require("Backbone");
+var _ = require("underscore");
+Backbone.$ = $;
+
+var MovieView = Backbone.View.extend({
+    el: "div",
+    className: "movie",
+    initialize: function() {
+        this.render();
+    },
+    template: _.template($("#movie").html()),
+    render: function() {
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    }
+});
+
+module.exports = Backbone.View.extend({
+    el: ".content",
+    initialize: function() {
+        this.render();
+    },
+    render: function() {
+        _.each(this.collection, this.addOne, this);
+        return this;
+    },
+    addOne: function(model) {
+        this.$el.append(new MovieView({
+            model: model
+        }).el);
+    }
+});
+},{"Backbone":8,"jquery":9,"underscore":10}],6:[function(require,module,exports){
 "use strict";
 
 var $ = require("jquery");
@@ -85,7 +133,7 @@ module.exports = Backbone.View.extend({
         return this;
     }
 });
-},{"Backbone":6,"jquery":7,"underscore":8}],5:[function(require,module,exports){
+},{"Backbone":8,"jquery":9,"underscore":10}],7:[function(require,module,exports){
 var theMovieDb = {};
 
 theMovieDb.common = {
@@ -1743,7 +1791,7 @@ theMovieDb.tvEpisodes = {
 };
 
 module.exports = theMovieDb;
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.3
 
@@ -3641,7 +3689,7 @@ module.exports = theMovieDb;
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":7,"underscore":8}],7:[function(require,module,exports){
+},{"jquery":9,"underscore":10}],9:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -12853,7 +12901,7 @@ return jQuery;
 
 }));
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
