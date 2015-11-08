@@ -1,0 +1,22 @@
+{
+  "name": "movie",
+  "version": "1.0.0",
+  "description": "about movies",
+  "main": "index.js",
+  "dependencies": {
+    "backbone": "^1.2.3",
+    "jquery": "^2.1.4",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "browserify-compile-templates": "^0.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "movie"
+  ],
+  "author": "hitrick",
+  "license": "ISC"
+}
