@@ -76,6 +76,21 @@ body {
     left: 0;
     right: 0;
     background-color: rgba(0,0,0, 0.5);
+    .active_pop__info {
+      background-color: #fff;
+      margin: 45px 100px;
+      padding: 10px;
+      .left_row, .right_row {
+        border: 1px solid red;
+        display: inline-block;
+      }
+      .left_row {
+        width: 300px;
+      }
+      .right_row {
+        width: 75%;
+      }
+    }
     .close_active {
       position: absolute;
       right: 15px;
@@ -88,6 +103,14 @@ body {
       cursor: pointer;
       &:hover {
         opacity: 0.7;
+      }
+    }
+    .active_pop__poster {
+      width: 240px;
+      height: 360px;
+      overflow: hidden;
+      img {
+        max-width: 100%;
       }
     }
   }

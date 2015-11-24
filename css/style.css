@@ -78,6 +78,22 @@ body .active_pop {
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
+body .active_pop .active_pop__info {
+  background-color: #fff;
+  margin: 45px 100px;
+  padding: 10px;
+}
+body .active_pop .active_pop__info .left_row,
+body .active_pop .active_pop__info .right_row {
+  border: 1px solid red;
+  display: inline-block;
+}
+body .active_pop .active_pop__info .left_row {
+  width: 300px;
+}
+body .active_pop .active_pop__info .right_row {
+  width: 75%;
+}
 body .active_pop .close_active {
   position: absolute;
   right: 15px;
@@ -91,4 +107,12 @@ body .active_pop .close_active {
 }
 body .active_pop .close_active:hover {
   opacity: 0.7;
+}
+body .active_pop .active_pop__poster {
+  width: 240px;
+  height: 360px;
+  overflow: hidden;
+}
+body .active_pop .active_pop__poster img {
+  max-width: 100%;
 }

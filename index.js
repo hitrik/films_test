@@ -4,11 +4,19 @@ var theMovieDb = require('./js/vendor/moviedb');
 angular.module("app", [])
 .controller("mainController", function($scope, getData) {
         $scope.data = [];
+        $scope.toggleFilm = false;
+        console.log($scope.toggleFilm);
+        $scope.hideFilm = function() {
+            this.toggleFilm = false;
+        };
         $scope.pathImg = theMovieDb.common.images_uri;
         $scope.pathImg_1280 = theMovieDb.common.images_uri_1280;
         $scope.mouseHover = false;
         $scope.onHover = function() {
             this.mouseHover = true;
+        };
+        $scope.onOut = function() {
+            this.mouseHover = false;
         };
         $scope.active = {
             "adult":false,
@@ -37,9 +45,6 @@ angular.module("app", [])
             "vote_average":7.0,
             "vote_count":1635
         };
-        $scope.onOut = function() {
-            this.mouseHover = false;
-        };
         new Promise(function(resolve, reject) {
             getData.getMovies({}, function(result) {
                 resolve(result);
@@ -52,9 +57,10 @@ angular.module("app", [])
             });
         $scope.getFilm = function(options) {
             getData.getById(options, function(film) {
-                console.log(film);
                 $scope.$apply(function() {
                     $scope.active = film;
+                    $scope.toggleFilm = true;
+                    console.log($scope.active, $scope.toggleFilm);
                 });
             });
         };
