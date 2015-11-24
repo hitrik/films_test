@@ -5,9 +5,29 @@
     <title>Movies DB</title>
     <link rel="stylesheet" href="./css/style.css"/>
 </head>
-<body data-ng-controller="mainController">
-<div ng-repeat="item in data"><pre ng-cloak>{{item}}</pre></div>
-<div>Click</div>
+<body>
+<div class="container" data-ng-controller="mainController">
+    <div ng-repeat="item in data" class="item_film" ng-click="getFilm({id: item.id})" ng-mouseover="onHover()" ng-mouseleave="onOut()">
+        <figure>
+            <img data-ng-src="{{pathImg + item.poster_path}}" alt="{{item.title}}"/>
+        </figure>
+        <div class="lang" data-ng-show="mouseHover">{{item.original_language}}</div>
+        <div class="rating" data-ng-show="mouseHover">{{item.vote_average}}</div>
+        <div class="title">{{item.title}}</div>
+    </div>
+</div>
+<div class="active_pop">
+    <i class="close_active">x</i>
+    <div class="left_row">
+        <figure>
+            <img ng-src="{{pathImg_1280 + active.poster_path}}" alt="active.title"/>
+        </figure>
+        <div class="active_pop__title">{{active.title}}</div>
+    </div>
+    <div class="right_row">
+
+    </div>
+</div>
 </body>
 <script src="./bundle.js"></script>
 </html>
