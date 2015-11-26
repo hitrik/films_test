@@ -15,9 +15,8 @@
         <div class="rating" data-ng-show="mouseHover">{{item.vote_average}}</div>
         <div class="title">{{item.title}}</div>
     </div>
-    <pre>{{active | json}}</pre>
 </div>
-<div class="active_pop" data-ng-show="toggleFilm">
+<div class="active_pop" data-ng-show="toggleFilm" data-bg-film>
     <i class="close_active" ng-click="hideFilm()">x</i>
     <section class="active_pop__info">
         <div class="left_row">
@@ -59,6 +58,14 @@
                 <tr>
                     <td>Производство</td>
                     <td>{{active.production_companies[0].name || "Не указано"}}</td>
+                </tr>
+                <tr>
+                    <td>Сайт фильма</td>
+                    <td>{{active.homepage || "Не указано"}}</td>
+                </tr>
+                <tr>
+                    <td>IMDB</td>
+                    <td>{{("http://www.imdb.com/title/" + active.imdb_id) || "Не указано"}}</td>
                 </tr>
             </table>
         </div>

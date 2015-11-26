@@ -81,7 +81,6 @@ body {
       margin: 45px 100px;
       padding: 10px;
       .left_row, .right_row {
-        border: 1px solid red;
         display: inline-block;
         vertical-align: top;
       }
@@ -89,10 +88,24 @@ body {
         width: 300px;
         .active_pop__title {
           text-align: center;
+          padding: 5px;
         }
       }
       .right_row {
         width: 75%;
+        table {
+          border-collapse: collapse;
+          tr {
+
+          }
+          td {
+            padding: 5px;
+            border-bottom: 1px solid #ededed;
+            &:first-child {
+              border-right: 1px solid #ededed;
+            }
+          }
+        }
       }
     }
     .close_active {
@@ -113,6 +126,10 @@ body {
       width: 240px;
       height: 360px;
       overflow: hidden;
+      margin: 10px auto;
+      figure {
+        margin: 10px auto;
+      }
       img {
         max-width: 100%;
       }

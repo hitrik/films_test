@@ -5,7 +5,6 @@ angular.module("app", [])
 .controller("mainController", function($scope, getData) {
         $scope.data = [];
         $scope.toggleFilm = false;
-        console.log($scope.toggleFilm);
         $scope.hideFilm = function() {
             this.toggleFilm = false;
         };
@@ -20,7 +19,7 @@ angular.module("app", [])
         };
         $scope.active = {
             "adult":false,
-            "backdrop_path":"/kvXLZqY0Ngl1XSw7EaMQO0C1CCj.jpg",
+            "backdrop_path":$scope.pathImg_1280 + "/kvXLZqY0Ngl1XSw7EaMQO0C1CCj.jpg",
             "belongs_to_collection":null,
             "budget":130000000,
             "genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":878,"name":"Science Fiction"}],
@@ -45,6 +44,7 @@ angular.module("app", [])
             "vote_average":7.0,
             "vote_count":1635
         };
+        $scope.back = $scope.pathImg_1280 + $scope.active.backdrop_path;
         new Promise(function(resolve, reject) {
             getData.getMovies({}, function(result) {
                 resolve(result);
@@ -52,15 +52,14 @@ angular.module("app", [])
         }).then(function(res) {
                 $scope.$apply(function() {
                     $scope.data = res;
-                    console.log($scope.data);
                 });
             });
         $scope.getFilm = function(options) {
             getData.getById(options, function(film) {
                 $scope.$apply(function() {
                     $scope.active = film;
+                    $scope.back = $scope.pathImg_1280 + $scope.active.backdrop_path;
                     $scope.toggleFilm = true;
-                    console.log($scope.active, $scope.toggleFilm);
                 });
             });
         };
@@ -86,5 +85,14 @@ angular.module("app", [])
         return {
             getMovies: getMovies,
             getById: getById
+        };
+    })
+    .directive("bgFilm", function() {
+        return {
+            restrict: "A",
+            controller: "mainController",
+            link: function(scope, elem, attrs) {
+                elem.css("background", "url(" + scope.back + ")");
+            }
         };
     });
