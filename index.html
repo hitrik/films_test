@@ -26,7 +26,42 @@
             </figure>
             <div class="active_pop__title">{{active.title}}</div>
         </div>
-        <div class="right_row"></div>
+        <div class="right_row">
+            <table>
+                <tr>
+                    <td>Название</td>
+                    <td>{{active.title}}</td>
+                </tr>
+                <tr>
+                    <td>Слоган</td>
+                    <td>{{active.tagline}}</td>
+                </tr>
+                <tr>
+                    <td>Дата выхода</td>
+                    <td>{{active.release_date}}</td>
+                </tr>
+                <tr>
+                    <td>Продолжительность</td>
+                    <td>{{active.runtime}} мин.</td>
+                </tr>
+                <tr>
+                    <td>Жанр</td>
+                    <td><span data-ng-repeat="genre in active.genres">{{genre.name}}, </span></td>
+                </tr>
+                <tr>
+                    <td>Бюджет</td>
+                    <td>{{(active.budget/1000000)}}$ млн.</td>
+                </tr>
+                <tr>
+                    <td>Синопсис</td>
+                    <td>{{active.overview}}</td>
+                </tr>
+                <tr>
+                    <td>Производство</td>
+                    <td>{{active.production_companies[0].name || "Не указано"}}</td>
+                </tr>
+            </table>
+        </div>
     </section>
 </div>
 </body>

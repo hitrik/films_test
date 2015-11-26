@@ -87,9 +87,13 @@ body .active_pop .active_pop__info .left_row,
 body .active_pop .active_pop__info .right_row {
   border: 1px solid red;
   display: inline-block;
+  vertical-align: top;
 }
 body .active_pop .active_pop__info .left_row {
   width: 300px;
+}
+body .active_pop .active_pop__info .left_row .active_pop__title {
+  text-align: center;
 }
 body .active_pop .active_pop__info .right_row {
   width: 75%;
