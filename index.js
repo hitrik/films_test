@@ -44,7 +44,7 @@ angular.module("app", [])
             "vote_average":7.0,
             "vote_count":1635
         };
-        $scope.back = $scope.pathImg_1280 + $scope.active.backdrop_path;
+        $scope.styleObj = {};
         new Promise(function(resolve, reject) {
             getData.getMovies({}, function(result) {
                 resolve(result);
@@ -58,7 +58,10 @@ angular.module("app", [])
             getData.getById(options, function(film) {
                 $scope.$apply(function() {
                     $scope.active = film;
-                    $scope.back = $scope.pathImg_1280 + $scope.active.backdrop_path;
+                    $scope.styleObj = {
+                        'background': "url(" + ($scope.pathImg_1280 + $scope.active.backdrop_path) + ")"
+                    };
+                    console.log($scope.styleObj);
                     $scope.toggleFilm = true;
                 });
             });
@@ -92,7 +95,7 @@ angular.module("app", [])
             restrict: "A",
             controller: "mainController",
             link: function(scope, elem, attrs) {
-                elem.css("background", "url(" + scope.back + ")");
+               // elem.css("background", "url(" + scope.back + ")");
             }
         };
     });
