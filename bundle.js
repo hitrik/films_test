@@ -60,7 +60,8 @@ angular.module("app", [])
                 $scope.$apply(function() {
                     $scope.active = film;
                     $scope.styleObj = {
-                        'background': "url(" + ($scope.pathImg_1280 + $scope.active.backdrop_path) + ")"
+                        'background': "url(" + ($scope.pathImg_1280 + $scope.active.backdrop_path) + ")",
+                        'background-size': 'cover'
                     };
                     console.log($scope.styleObj);
                     $scope.toggleFilm = true;
@@ -89,15 +90,6 @@ angular.module("app", [])
         return {
             getMovies: getMovies,
             getById: getById
-        };
-    })
-    .directive("bgFilm", function() {
-        return {
-            restrict: "A",
-            controller: "mainController",
-            link: function(scope, elem, attrs) {
-               // elem.css("background", "url(" + scope.back + ")");
-            }
         };
     });
 
